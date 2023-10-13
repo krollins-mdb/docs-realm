@@ -12,6 +12,7 @@ import {Logger} from './src/components/logger/Logger';
 import {ObjectModels} from './src/components/object-models/ObjectModels';
 import {RelationshipExamples} from './src/components/relationships/RealmWrapper';
 import {CompensatingWriteErrorHandling} from './src/components/errors/CompensatingWriteWrapper';
+import {Crud} from './src/components/crud/RealmWrapper';
 
 // Screens
 import {SubscriptionScreen} from './src/screens/SubscriptionScreen';
@@ -48,6 +49,7 @@ function App(): JSX.Element {
           name="Errors"
           component={CompensatingWriteErrorHandling}
         />
+        <Drawer.Screen name="CRUD" component={Crud} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

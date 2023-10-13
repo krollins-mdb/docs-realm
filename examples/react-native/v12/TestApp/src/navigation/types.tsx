@@ -11,6 +11,7 @@ export type RootStackParamList = {
   FullTextSearch: undefined;
   Relationships: undefined;
   Errors: undefined;
+  CRUD: undefined;
 };
 
 export type SubscriptionStackParamList = {

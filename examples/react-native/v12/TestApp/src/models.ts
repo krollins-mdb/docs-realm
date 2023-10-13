@@ -232,3 +232,111 @@ export class Warranty extends Realm.Object {
 */
 
 // :replace-end:
+
+/*
+  Start CRUD object models
+*/
+
+export class Forest extends Realm.Object {
+  _id!: BSON.ObjectId;
+  name!: string;
+  caretakers!: Botanist[];
+  trees!: Tree[];
+  type?: string;
+
+  static schema: Realm.ObjectSchema = {
+    name: 'Forest',
+    properties: {
+      _id: 'objectId',
+      name: 'string',
+      caretakers: 'Botanist[]',
+      trees: 'Tree[]',
+      type: 'string?',
+    },
+  };
+}
+
+export class Tree extends Realm.Object {
+  _id!: BSON.ObjectId;
+  species!: string;
+  growthLogs!: GrowthLog[];
+  forest!: Forest;
+  assignedTo?: Botanist;
+
+  static schema: Realm.ObjectSchema = {
+    name: 'Tree',
+    properties: {
+      _id: 'objectId',
+      species: 'string',
+      growthLogs: 'GrowthLog[]',
+      forest: {
+        type: 'linkingObjects',
+        objectType: 'Forest',
+        property: 'trees',
+      },
+      assignedTo: {
+        type: 'linkingObjects',
+        objectType: 'Botanist',
+        property: 'trees',
+      },
+    },
+  };
+}
+
+export class GrowthLog extends Realm.Object {
+  _id!: BSON.ObjectId;
+  date!: Date;
+  height!: number;
+  trunkWidth!: number;
+  note?: Note;
+
+  static schema: Realm.ObjectSchema = {
+    name: 'GrowthLog',
+    properties: {
+      _id: 'objectId',
+      date: 'date',
+      height: 'int',
+      trunkWidth: 'int',
+      note: 'Note?',
+    },
+  };
+}
+
+export class Note extends Realm.Object {
+  title!: string;
+  fieldNote!: number;
+  isHealthy!: boolean;
+  imageUri?: string;
+
+  static schema: Realm.ObjectSchema = {
+    name: 'Note',
+    embedded: true,
+    properties: {
+      title: 'string',
+      fieldNote: 'string',
+      isHealthy: 'bool',
+      imageUri: 'string?',
+    },
+  };
+}
+
+export class Botanist extends Realm.Object {
+  _id!: BSON.ObjectId;
+  name!: string;
+  trees!: Tree[];
+  forest!: Forest;
+
+  static schema: Realm.ObjectSchema = {
+    name: 'Botanist',
+    properties: {
+      _id: 'objectId',
+      name: 'string',
+      trees: 'Tree[]',
+      forest: 'Forest',
+    },
+  };
+}
+
+/*
+  End CRUD object models
+*/
