@@ -1,13 +1,6 @@
 import React, {useState} from 'react';
 import {useQuery} from '@realm/react';
-import {
-  Button,
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Pressable,
-} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Pressable} from 'react-native';
 
 import {CreateForest} from './Create';
 import {CreateTree} from './Create';
@@ -22,14 +15,16 @@ export const Read = () => {
 
   if (selectedForest) {
     return (
-      <ForestView
-        forest={selectedForest}
-        setSelectedForest={setSelectedForest}
-      />
+      <View style={styles.pageLayout}>
+        <ForestView
+          forest={selectedForest}
+          setSelectedForest={setSelectedForest}
+        />
+      </View>
     );
   } else {
     return (
-      <View>
+      <View style={styles.pageLayout}>
         <View style={styles.viewHeader}>
           <Text style={styles.viewTitle}>All forests</Text>
           <Pressable
@@ -213,6 +208,10 @@ const ForestView = ({forest, setSelectedForest}: ForestProps) => {
 };
 
 const styles = StyleSheet.create({
+  pageLayout: {
+    paddingVertical: 12,
+    marginHorizontal: 12,
+  },
   viewTitle: {
     fontSize: 16,
     fontWeight: '500',
