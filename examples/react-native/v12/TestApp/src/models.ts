@@ -304,7 +304,7 @@ export class GrowthLog extends Realm.Object {
 
 export class Note extends Realm.Object {
   title!: string;
-  fieldNote!: number;
+  fieldNote!: string;
   isHealthy!: boolean;
   imageUri?: string;
 
